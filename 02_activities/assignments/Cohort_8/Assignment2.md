@@ -54,7 +54,12 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+If the store wants to retain changes for the CUSTOMER_ADDRESS table, the type 2 slowly changing dimension architecture is recommended because it creates a new customer address record for each change to the historical data it has for the customer address. When a customer address changes, a new row with the updated address will be created in the table. While the old address for the customer is still retained in the table. This table would need a way to identify the current address, such as by having an is_active column that indicates the current address, or a timestamp column that could tell us the most recent address. This table can have many rows per customer. 
+
+Whereas, if the store wants to overwrite the previous customer address in the table when there is a new customer address, the type 1 slowly changing dimensions is recommended. The new customer address will replace the old address in the row. No historical data will be retained. This table will have exactly one row per customer. 
+
+In either design, the customer_address table would have columns such as street name, house number, postal code, city, province/state, and country. 
+
 ```
 
 ***
